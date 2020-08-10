@@ -15,7 +15,7 @@ const transactionReducer = (state, action) => {
                 ...state,
                 transactions: state.transactions.filter(transaction => transaction.id !== action.payload)
             }
-        case 'ADD_TRANSACTION':
+        case 'CREATE_TRANSACTION':
             return {
                 ...state,
                 transactions: [action.payload, ...state.transactions]
@@ -36,9 +36,9 @@ export const GlobalProvider = ({ children }) => {
         });
     }
 
-    function addTransaction(transaction) {
+    function createTransaction(transaction) {
         dispatch({
-            type: 'ADD_TRANSACTION',
+            type: 'CREATE_TRANSACTION',
             payload: transaction
         });
     }
@@ -46,7 +46,7 @@ export const GlobalProvider = ({ children }) => {
     return (<GlobalContext.Provider value={{
         transactions: state.transactions,
         deleteTransaction,
-        addTransaction
+        createTransaction
     }}>
         {children}
     </GlobalContext.Provider>);
